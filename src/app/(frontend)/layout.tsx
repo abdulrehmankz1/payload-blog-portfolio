@@ -1,19 +1,21 @@
-import React from 'react'
-import './styles.css'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 
-export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+const inter = Inter({ subsets: ['latin'] })
+
+export const metadata: Metadata = {
+  title: 'My Blog & Portfolio',
+  description: 'Built with Payload CMS and Next.js',
 }
 
-export default async function RootLayout(props: { children: React.ReactNode }) {
-  const { children } = props
-
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
-      <body>
-        <main>{children}</main>
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   )
 }
