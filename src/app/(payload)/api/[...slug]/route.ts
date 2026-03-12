@@ -1,3 +1,10 @@
+// import { handleRequest } from '@payloadcms/next/utilities'
+// import configPromise from '@payload-config'
+
+// // This single route handler powers the entire Payload admin panel
+// // and REST API at /api/* routes
+// export const { GET, POST, DELETE, PATCH, PUT } = handleRequest(configPromise)
+
 /* THIS FILE WAS GENERATED AUTOMATICALLY BY PAYLOAD. */
 /* DO NOT MODIFY IT BECAUSE IT COULD BE REWRITTEN AT ANY TIME. */
 import config from '@payload-config'
