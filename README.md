@@ -1,67 +1,199 @@
-# Payload Blank Template
+# 🚀 Payload Blog & Portfolio
 
-This template comes configured with the bare minimum to get started on anything you need.
+A production-ready **Blog + Portfolio CMS** built with [Payload CMS 3](https://payloadcms.com/) and [Next.js 15](https://nextjs.org/). Manage your blog posts and projects from a beautiful admin panel with a fast, SEO-friendly Next.js frontend.
 
-## Quick start
+**Built by [Abdul Rehman Khanzada](https://github.com/abdulrehmankz1)**
 
-This template can be deployed directly from our Cloud hosting and it will setup MongoDB and cloud S3 object storage for media.
+---
 
-## Quick Start - local setup
+## 🔗 Links
 
-To spin up this template locally, follow these steps:
+- **Repository:** [github.com/abdulrehmankz1/payload-blog-portfolio](https://github.com/abdulrehmankz1/payload-blog-portfolio)
+- **Live Demo:** Coming soon
 
-### Clone
+---
 
-After you click the `Deploy` button above, you'll want to have standalone copy of this repo on your machine. If you've already cloned this repo, skip to [Development](#development).
+## 🎯 Demo Access
 
-### Development
+Want to explore the admin panel? Use these credentials:
 
-1. First [clone the repo](#clone) if you have not done so already
-2. `cd my-project && cp .env.example .env` to copy the example environment variables. You'll need to add the `MONGODB_URL` from your Cloud project to your `.env` if you want to use S3 storage and the MongoDB database that was created for you.
+| Field | Value |
+|-------|-------|
+| **URL** | `/admin` |
+| **Email** | `user@demo.com` |
+| **Password** | `demo12345` |
 
-3. `pnpm install && pnpm dev` to install dependencies and start the dev server
-4. open `http://localhost:3000` to open the app in your browser
+> ⚠️ Please do not change the demo credentials or delete existing content.
 
-That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
+---
 
-#### Docker (Optional)
+## ✨ Features
 
-If you prefer to use Docker for local development instead of a local MongoDB instance, the provided docker-compose.yml file can be used.
+- **Blog** — Rich text posts with cover images, categories, tags, author, reading time, and full SEO control
+- **Portfolio** — Project showcase with tech stack badges, screenshot gallery, live demo & GitHub links
+- **Admin Panel** — Full Payload CMS admin at `/admin` — batteries included
+- **Role-Based Access** — Admin and Author roles with per-collection permissions
+- **Auto Slug Generation** — Slugs auto-generate from titles on creation
+- **Responsive Images** — Auto-generates thumbnail, card, and hero sizes on every upload
+- **Draft / Publish System** — Work in drafts, publish when ready
+- **Reading Time** — Auto-calculated from post content
+- **SEO Ready** — Meta title, meta description, and Open Graph image per post and project
+- **Type Safe** — Full TypeScript with auto-generated Payload types
 
-To do so, follow these steps:
+---
 
-- Modify the `MONGODB_URL` in your `.env` file to `mongodb://127.0.0.1/<dbname>`
-- Modify the `docker-compose.yml` file's `MONGODB_URL` to match the above `<dbname>`
-- Run `docker-compose up` to start the database, optionally pass `-d` to run in the background.
+## 🗄️ Collections
 
-## How it works
+| Collection | Purpose |
+|------------|---------|
+| `users` | Authentication with Admin / Author roles |
+| `media` | Image uploads with auto-resize (thumbnail, card, hero) |
+| `categories` | Shared taxonomy for posts and projects |
+| `posts` | Blog posts with rich text, SEO, and publishing workflow |
+| `projects` | Portfolio projects with tech stack, links, and gallery |
 
-The Payload config is tailored specifically to the needs of most websites. It is pre-configured in the following ways:
+---
 
-### Collections
+## 📁 Project Structure
 
-See the [Collections](https://payloadcms.com/docs/configuration/collections) docs for details on how to extend this functionality.
+```
+src/
+├── collections/
+│   ├── Users.ts
+│   ├── Media.ts
+│   ├── Categories.ts
+│   ├── Posts.ts
+│   └── Projects.ts
+├── app/
+│   ├── (frontend)/
+│   │   ├── page.tsx              # Homepage
+│   │   ├── blog/
+│   │   │   ├── page.tsx          # Blog listing
+│   │   │   └── [slug]/page.tsx   # Single post
+│   │   └── projects/
+│   │       ├── page.tsx          # Projects listing
+│   │       └── [slug]/page.tsx   # Single project
+│   └── (payload)/
+│       └── api/[...slug]/route.ts  # Payload API handler
+└── payload.config.ts
+```
 
-- #### Users (Authentication)
+---
 
-  Users are auth-enabled collections that have access to the admin panel.
+## 🛠️ Local Setup
 
-  For additional help, see the official [Auth Example](https://github.com/payloadcms/payload/tree/main/examples/auth) or the [Authentication](https://payloadcms.com/docs/authentication/overview#authentication-overview) docs.
+### Prerequisites
 
-- #### Media
+- Node.js 18.20+ or 20+
+- pnpm (`npm install -g pnpm`)
+- MongoDB — local or [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) (free tier)
 
-  This is the uploads enabled collection. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
+### 1. Clone the Repository
 
-### Docker
+```bash
+git clone https://github.com/abdulrehmankz1/payload-blog-portfolio.git
+cd payload-blog-portfolio
+```
 
-Alternatively, you can use [Docker](https://www.docker.com) to spin up this template locally. To do so, follow these steps:
+### 2. Install Dependencies
 
-1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
+```bash
+pnpm install
+```
 
-That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
+### 3. Environment Variables
 
-## Questions
+```bash
+cp .env.example .env
+```
 
-If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
+Edit `.env` with your values:
+
+```env
+DATABASE_URI=mongodb://localhost:27017/payload-blog
+PAYLOAD_SECRET=your-random-secret-here
+NEXT_PUBLIC_SERVER_URL=http://localhost:3000
+```
+
+Generate a secure `PAYLOAD_SECRET`:
+
+```bash
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
+
+### 4. Start Development Server
+
+```bash
+pnpm dev
+```
+
+- **Frontend:** [http://localhost:3000](http://localhost:3000)
+- **Admin Panel:** [http://localhost:3000/admin](http://localhost:3000/admin)
+
+### 5. Create First Admin User
+
+On first visit to `/admin`, you will be prompted to create an admin account. This becomes your CMS login.
+
+### 6. Generate TypeScript Types
+
+Run this whenever you change a collection:
+
+```bash
+pnpm generate:types
+```
+
+---
+
+## 🌐 Deployment (Vercel)
+
+1. Push your code to GitHub
+2. Import the project on [Vercel](https://vercel.com)
+3. Add these environment variables in the Vercel dashboard:
+
+| Variable | Value |
+|----------|-------|
+| `DATABASE_URI` | Your MongoDB Atlas connection string |
+| `PAYLOAD_SECRET` | A strong random secret |
+| `NEXT_PUBLIC_SERVER_URL` | Your Vercel URL e.g. `https://my-site.vercel.app` |
+
+4. Deploy — done!
+
+---
+
+## 🔌 REST API
+
+Payload auto-generates REST endpoints for all collections:
+
+```bash
+# Get all published posts
+GET /api/posts?where[status][equals]=published
+
+# Get a single post by slug
+GET /api/posts?where[slug][equals]=my-post-slug
+
+# Get all published projects
+GET /api/projects?where[status][equals]=published
+
+# Login
+POST /api/users/login
+Body: { "email": "user@demo.com", "password": "demo12345" }
+```
+
+---
+
+## 🧩 Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| [Payload CMS 3](https://payloadcms.com/) | Headless CMS + Admin Panel |
+| [Next.js 15](https://nextjs.org/) | React Framework (App Router) |
+| [MongoDB](https://www.mongodb.com/) | Database |
+| [TypeScript](https://www.typescriptlang.org/) | Type Safety |
+| [Lexical](https://lexical.dev/) | Rich Text Editor |
+| [Sharp](https://sharp.pixelplumbing.com/) | Image Processing |
+
+---
+
+## 📄 License
+
+MIT © [Abdul Rehman Khanzada](https://github.com/abdulrehmankz1)
